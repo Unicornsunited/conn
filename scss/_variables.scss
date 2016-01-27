@@ -1,0 +1,17 @@
+$disc-size: 100%;
+$cell-size: $disc-size;
+$cell-inner-padding: 0;
+$disc-padding: ($cell-size - $disc-size)/2;
+
+$player-1-color: red;
+$player-2-color: teal;
+
+$connect-directions:
+	"top-left",
+	"top",
+	"top-right",
+	"right",
+	"bottom-right",
+	"bottom",
+	"bottom-left",
+	"left";
