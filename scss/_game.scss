@@ -17,6 +17,7 @@
 	left: $disc-padding;
 	top: -100vh;
 	bottom: 100vh;
+	overflow: visible;
 	pointer-events: none;
 	opacity: 0;
 	display: block;
@@ -28,26 +29,59 @@
 		bottom: $disc-padding;
 		opacity: 1;
 	}
-	.player-1-move & .game-move-disc{
-		fill: $player-1-color;
+	.player-1-move & {
+		.game-move-disc{
+			fill: $player-1-color;
+		}
+		.game-move-connected {
+			fill: lighten($player-1-color, 17);
+		}
+		.game-connector {
+			stroke: lighten($player-1-color, 17); 
+		}
 	}
-	.player-2-move & .game-move-disc{
-		fill: $player-2-color;
+	.player-2-move & {
+		.game-move-disc{
+			fill: $player-2-color;
+		}
+		.game-move-connected {
+			fill: lighten($player-2-color, 17);
+		}
+		.game-connector {
+			stroke: lighten($player-2-color, 17); 
+		}
 	}
 
 	.game-connector {
-		stroke-width: 10;
-		stroke: hotpink;
+		stroke-width: 0;
 		stroke-dasharray: 150;
 		stroke-dashoffset: 150;
-		@include vendorize(transition, stroke-dashoffset .2s ease-in);
+		.connected &{
+			@include vendorize(transition, stroke-dashoffset .2s ease-in .5s, stroke-width 0 .5s);
+		}
+		@each $connector in $connect-directions {
+			.connect-#{$connector} &{
+				stroke-width: 10;
+			}
+		}
+	}
+}
+
+.game-move-connected {
+	visibility: hidden;
+	@include vendorize(transform, scale(0,0));
+	@include vendorize(transform-origin, 50% 50%);
+	@include vendorize(transition, transform .2s ease-out .3s);
+	.connected &{
+		visibility: visible;
+		@include vendorize(transform, scale(1,1));
 	}
 }
 
 .game-move-container{
 	padding-top: 100%;
 	position: relative;
-	border: 1px solid darken(#fff, 5);
+	background: #fff;
 	@each $connector in $connect-directions {
 		&.connect-#{$connector} {
 			.game-move-#{$connector} {

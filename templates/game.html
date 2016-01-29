@@ -7,9 +7,6 @@
                 <div class="player-2-turn" ng-show="activePlayer == 2">I'm making a move...</div>
         	</div>
         </div>
-        <div class="button-bar">
-            <input class="reset-button" type="button" ng-click="resetGame()" value="New Game"/>
-        </div>
     </div>
     <div>
     	<table class="game-table">
@@ -30,14 +27,15 @@
                                 xml:space="preserve"
                                 class="game-move">
                                 <circle class="game-move-disc" cx="50" cy="50" r="40"/>
-                                <line class="game-connector game-move-top-left" x1="50" y1="50" x2="0" y2="0"/>
-                                <line class="game-connector game-move-top" x1="50" y1="50" x2="50" y2="0"/>
-                                <line class="game-connector game-move-top-right" x1="50" y1="50" x2="100" y2="0"/>
-                                <line class="game-connector game-move-right" x1="50" y1="50" x2="100" y2="50"/>
-                                <line class="game-connector game-move-bottom-right" x1="50" y1="50" x2="100" y2="100"/>
-                                <line class="game-connector game-move-bottom" x1="50" y1="50" x2="50" y2="100"/>
-                                <line class="game-connector game-move-bottom-left" x1="50" y1="50" x2="0" y2="100"/>
-                                <line class="game-connector game-move-left" x1="50" y1="50" x2="0" y2="50"/>
+                                <circle class="game-move-connected" cx="50" cy="50" r="20"/>
+                                <line class="game-connector game-move-top-left" x1="50" y1="50" x2="-5" y2="-5"/>
+                                <line class="game-connector game-move-top" x1="50" y1="50" x2="50" y2="-5"/>
+                                <line class="game-connector game-move-top-right" x1="50" y1="50" x2="105" y2="-5"/>
+                                <line class="game-connector game-move-right" x1="50" y1="50" x2="105" y2="50"/>
+                                <line class="game-connector game-move-bottom-right" x1="50" y1="50" x2="105" y2="105"/>
+                                <line class="game-connector game-move-bottom" x1="50" y1="50" x2="50" y2="105"/>
+                                <line class="game-connector game-move-bottom-left" x1="50" y1="50" x2="-5" y2="105"/>
+                                <line class="game-connector game-move-left" x1="50" y1="50" x2="-5" y2="50"/>
                             </svg>
                         </div>
                     </td>
