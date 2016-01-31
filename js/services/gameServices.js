@@ -1,5 +1,5 @@
 angular.module('gameServices', [])
-.factory('GameMoves', function(){
+.factory('gameMoves', function(){
 	function whoseMove(grid, colNo, rowNo) {
 		if(grid[colNo][rowNo] === 1) {
 			return 1;

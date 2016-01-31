@@ -12,7 +12,7 @@
             <thead>
                 <tr>
                     <th ng-repeat="colNo in colIndices">
-                        <input class="drop-button" ng-disabled="!currentPlayer() || currentPlayer().isUser" type="button" ng-click="makeMove(currentPlayer(), colNo)" value="drop!" />
+                        <input class="drop-button" ng-disabled="!currentPlayer() || !currentPlayer().isUser" type="button" ng-click="currentPlayer().makeMove(colNo)" value="drop!" />
                     </th>
                 </tr>
             </thead>

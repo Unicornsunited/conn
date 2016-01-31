@@ -18,7 +18,7 @@ angular.module('app')
 		
 		constructor({
 			winningCount = 4,
-			moveDelay = 500,
+			moveDelay = 0,
 			rowCount = 6,
 			colCount = 7
 		} = {}) 

@@ -35,8 +35,8 @@ module.exports = function(grunt) {
                 tasks: ['sass:dev']
             },
             ts: {
-                files: ['js/**/*.ts'],
-                tasks: ['typescript:dev']
+                files: ['js/**/*.js'],
+                tasks: ['browserify:dev']
             },
             options: {
                 livereload: true,
@@ -52,7 +52,8 @@ module.exports = function(grunt) {
             build: {
                 options: {
                     port: process.env.PORT || 8080,
-                    keepalive: true
+                    keepalive: true,
+                    open: true
                 }
             }
         },
@@ -65,7 +66,10 @@ module.exports = function(grunt) {
                     transform: [
                         [
                             'babelify', {
-                                'sourceMapRelative': "js/map/app.js.map"
+                                'sourceMapRelative': "/dist/app.js.map",
+                                'presets': [
+                                    'es2015'
+                                ]
                             }
                         ]
                     ]
@@ -73,13 +77,18 @@ module.exports = function(grunt) {
             },
             build: {
                 files: {
-                    'dist/app.min.js': ['js/**/*.js']
+                    "dist/app.min.js": ["js/**/*.js"]
                 },
                 options: {
                     transform: [
-                        'babelify', {
-                            sourceMap: true
-                        }
+                        [
+                            'babelify', {
+                                'sourceMap': false,
+                                'presets': [
+                                    'es2015'
+                                ]
+                            }
+                        ]
                     ]
                 }
             }

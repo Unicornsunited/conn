@@ -3,8 +3,14 @@ angular.module('app')
 {
 	class AutomatedPlayer extends Player {
 		
-		constructor(id, { isUser = false } = {}) {
+		constructor(id, {
+			isUser = false,
+			delayMax = 2000,
+			delayMin = 200
+		} = {}) {
 			super(id, { isUser : isUser, isAutomated: true });
+			this.delayMax = delayMax;
+			this.delayMin = delayMin;
 		}
 		
 		onTurnStarted(){
@@ -14,7 +20,7 @@ angular.module('app')
 			{
 				makeAutomatedMove(self.game, self.id);
 			},
-			500);
+			this.delayMin + Math.floor(Math.random()*this.delayMax));
 		}
 	}
 	

@@ -1,7 +1,7 @@
 angular.module('app', [
 	'ui.router',
-	'gameServices',
-	'gameControllers'
+	'gameControllers',
+	'gameServices'
 ]).config(function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.otherwise("/");
@@ -15,6 +15,6 @@ angular.module('app', [
 	.state('app.game', {
 		url: "",
 		templateUrl: "templates/game.html",
-		controller: 'GameController'
+		controller: 'gameController'
 	});
 })
