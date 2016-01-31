@@ -13,7 +13,7 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     src: ['scss/app.scss'],
-                    dest: 'css/app.css'
+                    dest: 'dist/app.min.css'
                 }]
             },
             build: {
@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     src: ['scss/app.scss'],
-                    dest: 'css/app.css'
+                    dest: 'dist/app.min.css'
                 }]
             },
         },
@@ -56,28 +56,30 @@ module.exports = function(grunt) {
                 }
             }
         },
-        typescript: {
+        browserify: {
             dev: {
-                src: ['js/**/*.ts'],
-                dest: 'dist/app.min.js',
+                files: {
+                    "dist/app.min.js": ["js/**/*.js"]
+                },
                 options: {
-                    target: 'es5', //or es3 
-                    sourceMap: true,
-                    declaration: true,
-                    references: [
-                        'node_modules/definitely-typed-angular/angular.d.ts'
+                    transform: [
+                        [
+                            'babelify', {
+                                'sourceMapRelative': "js/map/app.js.map"
+                            }
+                        ]
                     ]
                 }
             },
             build: {
-                src: ['js/**/*.ts'],
-                dest: 'dist/app.min.js',
+                files: {
+                    'dist/app.min.js': ['js/**/*.js']
+                },
                 options: {
-                    target: 'es5', //or es3 
-                    sourceMap: false,
-                    declaration: true,
-                    references: [
-                        'node_modules/definitely-typed-angular/angular.d.ts'
+                    transform: [
+                        'babelify', {
+                            sourceMap: true
+                        }
                     ]
                 }
             }
@@ -94,7 +96,7 @@ module.exports = function(grunt) {
     // ...
     grunt.registerTask('build', [
         'sass:build',
-        'typescript:build'
+        'browserify:build'
     ]);
     grunt.registerTask('deploy', [
         'build',
@@ -102,7 +104,7 @@ module.exports = function(grunt) {
     ]);
     grunt.registerTask('dev', [
         'connect:dev',
-        'typescript:dev',
+        'browserify:dev',
         'sass:dev',
         'watch'
     ]);
