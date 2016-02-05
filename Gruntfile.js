@@ -65,13 +65,9 @@ module.exports = function(grunt) {
                 sourceMap: true
             },
             dev: {
-                files: [{
-                    expand: true,
-                    // cwd: 'lib/',
-                    src: ['js/**/*.js'],
-                    dest: 'dist/temp/',
-                    ext: '.js'
-                }],
+                files: {
+                    'dist/app.min.js': ['dist/app.min.js']
+                },
             },
             build: {
                 options: {
@@ -80,21 +76,29 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     // cwd: 'lib/',
-                    src: ['js/**/*.js'],
-                    dest: 'dist/temp/',
+                    src: ['dist/app.min.js'],
+                    dest: 'dist/app.min.js',
                     ext: '.js'
                 }]
             }
+        },
+        concat: {
+            dev: {
+                files: {
+                    'dist/app.min.js': ['js/**/*.js'],
+                },
+            },
         },
         uglify: {
             options: {
                 mangle: false,
                 screwIE8: true,
-                sourceMap: true
+                sourceMap: true,
+                sourceMapIn: (path) => `${path}.map`
             },
             dev: {
                 files: {
-                    'dist/app.min.js': ['dist/temp/**/*.js']
+                    'dist/app.min.js': ['dist/app.min.js']
                 }
             },
             build: {
@@ -103,7 +107,7 @@ module.exports = function(grunt) {
                     drop_console: true
                 },
                 files: {
-                    'dist/app.min.js': ['dist/temp/**/*.js']
+                    'dist/app.min.js': ['dist/app.min.js']
                 }
             }
         }
@@ -119,6 +123,7 @@ module.exports = function(grunt) {
     // ...
     grunt.registerTask('build', [
         'sass:build',
+        'concat:dev',
         'babel:build',
         'uglify:build'
     ]);
@@ -128,6 +133,7 @@ module.exports = function(grunt) {
     ]);
     grunt.registerTask('dev', [
         'connect:dev',
+        'concat:dev',
         'babel:dev',
         'uglify:dev',
         'sass:dev',
