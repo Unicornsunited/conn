@@ -1,8 +1,11 @@
 angular.module('app', [
 	'ui.router',
 	'gameControllers',
-	'gameServices'
+	'gameServices',
+	'player'
 ]).config(function($stateProvider, $urlRouterProvider) {
+	
+	let _templatePath = "templates/";
 
 	$urlRouterProvider.otherwise("/");
 
@@ -10,11 +13,15 @@ angular.module('app', [
 	.state('app', {
         url: "/",
         abstract: true,
-        templateUrl: "templates/layout.html"
+        templateUrl: `${_templatePath}layout.html`
     })
 	.state('app.game', {
 		url: "",
-		templateUrl: "templates/game.html",
-		controller: 'gameController'
+		views: {
+			'content@': {
+				templateUrl: `${_templatePath}game.html`,
+				controller: 'gameController'
+			}
+		}
 	});
 })

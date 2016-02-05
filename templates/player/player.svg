@@ -1,0 +1,8 @@
+<svg version="1.1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 x="0px" y="0px" width="94px" height="100px" viewBox="0 0 94 100" enable-background="new 0 0 94 100" xml:space="preserve">
+<defs>
+</defs>
+	<g class="player-face" ng-include="'{{path.base}}{{path.face}}{{player.face}}.svg'"></g>
+	<g class="player-shape" ng-include="'{{templatePath}}{{path.body}}{{player.body}}.svg'"></g>
+</svg>

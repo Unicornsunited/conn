@@ -34,9 +34,12 @@ module.exports = function(grunt) {
                 files: ['scss/**/*.scss'],
                 tasks: ['sass:dev']
             },
-            ts: {
+            js: {
                 files: ['js/**/*.js'],
-                tasks: ['browserify:dev']
+                tasks: [
+                    'babel:dev',
+                    'uglify:dev'
+                ]
             },
             options: {
                 livereload: true,
@@ -57,39 +60,50 @@ module.exports = function(grunt) {
                 }
             }
         },
-        browserify: {
+        babel: {
+            options: {
+                sourceMap: true
+            },
+            dev: {
+                files: [{
+                    expand: true,
+                    // cwd: 'lib/',
+                    src: ['js/**/*.js'],
+                    dest: 'dist/temp/',
+                    ext: '.js'
+                }],
+            },
+            build: {
+                options: {
+                    sourceMap: false
+                },
+                files: [{
+                    expand: true,
+                    // cwd: 'lib/',
+                    src: ['js/**/*.js'],
+                    dest: 'dist/temp/',
+                    ext: '.js'
+                }]
+            }
+        },
+        uglify: {
+            options: {
+                mangle: false,
+                screwIE8: true,
+                sourceMap: true
+            },
             dev: {
                 files: {
-                    "dist/app.min.js": ["js/**/*.js"]
-                },
-                options: {
-                    transform: [
-                        [
-                            'babelify', {
-                                'sourceMapRelative': "/dist/app.js.map",
-                                'presets': [
-                                    'es2015'
-                                ]
-                            }
-                        ]
-                    ]
+                    'dist/app.min.js': ['dist/temp/**/*.js']
                 }
             },
             build: {
-                files: {
-                    "dist/app.min.js": ["js/**/*.js"]
-                },
                 options: {
-                    transform: [
-                        [
-                            'babelify', {
-                                'sourceMap': false,
-                                'presets': [
-                                    'es2015'
-                                ]
-                            }
-                        ]
-                    ]
+                    sourceMap: false,
+                    drop_console: true
+                },
+                files: {
+                    'dist/app.min.js': ['dist/temp/**/*.js']
                 }
             }
         }
@@ -105,7 +119,8 @@ module.exports = function(grunt) {
     // ...
     grunt.registerTask('build', [
         'sass:build',
-        'browserify:build'
+        'babel:build',
+        'uglify:build'
     ]);
     grunt.registerTask('deploy', [
         'build',
@@ -113,7 +128,8 @@ module.exports = function(grunt) {
     ]);
     grunt.registerTask('dev', [
         'connect:dev',
-        'browserify:dev',
+        'babel:dev',
+        'uglify:dev',
         'sass:dev',
         'watch'
     ]);

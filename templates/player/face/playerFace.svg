@@ -1,0 +1,10 @@
+<g class="player-face-container">
+	<circle fill="none" cx="50" cy="50" r="25"/>
+</g>
+<g class="player-face left-eye">
+	<circle fill="none" cx="65" cy="50" r="10"/>
+</g>
+<g class="player-face right-eye">
+	<circle fill="none" cx="35" cy="50" r="10"/>
+</g>
+<line class="player-face nose" fill="none" stroke="#FF00FF" stroke-miterlimit="10" x1="50" y1="0" x2="50" y2="100"/>
