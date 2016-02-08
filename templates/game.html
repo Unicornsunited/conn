@@ -1,14 +1,15 @@
 <div class="container">
-    <div class="header-bar info-bar well row">
+    <!--<div class="header-bar info-bar well row">
         <div col="col-xs-12">
             <input class="reset-button btn btn-lg" type="button" ng-click="resetGame()" value="New Game"/>
             <span class="message-bar {{message.cssClass}}">
                 <span>{{message.text}}</span>
             </span>
         </div>
-    </div>
+    </div>-->
+    <div class="game-gauge-container" ng-include="'templates/gameGauge.html'"></div>
     <div>
-    	<table class="game-table">
+    	<table class="game-table content-size">
             <thead>
                 <tr>
                     <th ng-repeat="colNo in colIndices">

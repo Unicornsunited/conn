@@ -73,20 +73,24 @@ module.exports = function(grunt) {
                 options: {
                     sourceMap: false
                 },
-                files: [{
-                    expand: true,
-                    // cwd: 'lib/',
-                    src: ['dist/app.min.js'],
-                    dest: 'dist/app.min.js',
-                    ext: '.js'
-                }]
+                files: {
+                    'dist/app.min.js': ['dist/app.min.js']
+                }
             }
         },
         concat: {
             dev: {
+                options: {
+                  sourceMap: true  
+                },
                 files: {
                     'dist/app.min.js': ['js/**/*.js'],
-                },
+                }
+            },
+            build: {
+                files: {
+                    'dist/app.min.js': ['js/**/*.js'],
+                }
             },
         },
         uglify: {
@@ -123,7 +127,7 @@ module.exports = function(grunt) {
     // ...
     grunt.registerTask('build', [
         'sass:build',
-        'concat:dev',
+        'concat:build',
         'babel:build',
         'uglify:build'
     ]);
